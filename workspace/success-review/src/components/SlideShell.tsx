@@ -1,4 +1,5 @@
 import React from 'react'
+import { useSuccessPlanStore } from '../store'
 
 type SlideShellProps = {
   title: string
@@ -28,7 +29,7 @@ function getAccentClasses(accent?: string) {
 
 export function SlideShell({ title, subtitle, children }: SlideShellProps) {
   // Later we can pass per-slide accent. For now, use global brand color from store
-  const brand = require('../store').useSuccessPlanStore.getState().plan.brandColor as string | undefined
+  const brand = useSuccessPlanStore(s => s.plan.brandColor)
   const accent = getAccentClasses(brand)
   return (
     <div className="w-full h-full flex flex-col">
