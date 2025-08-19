@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import * as React from 'react';
 import { useStore } from '@/lib/store/useStore';
 import { Slide } from '@/lib/types';
 import { ChevronLeft, ChevronRight, X } from 'lucide-react';

@@ -3,7 +3,7 @@
 import { useStore } from '@/lib/store/useStore';
 import { Download, Upload, Save, Settings } from 'lucide-react';
 import { downloadFile, readFileAsText } from '@/lib/utils';
-import { useRef } from 'react';
+import * as React from 'react';
 
 export default function Header() {
   const { customerName, setCustomerName, exportData, importData } = useStore();

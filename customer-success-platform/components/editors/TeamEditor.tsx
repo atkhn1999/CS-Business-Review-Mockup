@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import * as React from 'react';
 import { useStore } from '@/lib/store/useStore';
 import { TeamMember } from '@/lib/types';
 import { Plus, Trash2, Edit2, Check, X } from 'lucide-react';

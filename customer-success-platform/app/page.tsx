@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import * as React from 'react';
 import { useStore } from '@/lib/store/useStore';
 import SlideManager from '@/components/SlideManager';
 import EditPanel from '@/components/EditPanel';

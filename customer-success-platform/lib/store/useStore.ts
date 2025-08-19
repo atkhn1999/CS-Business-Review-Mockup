@@ -1,5 +1,4 @@
 import { create } from 'zustand';
-import { persist } from 'zustand/middleware';
 import { AppState, TeamMember, Stakeholder, MissionGoal, Objective, ValueRealized, Slide } from '@/lib/types';
 
 const defaultSlides: Slide[] = [
@@ -61,9 +60,7 @@ interface StoreActions {
   resetData: () => void;
 }
 
-export const useStore = create<AppState & StoreActions>()(
-  persist(
-    (set, get) => ({
+export const useStore = create<AppState & StoreActions>()((set, get) => ({
       // Initial state
       customerName: '[Customer Name]',
       teamMembers: [
@@ -228,9 +225,4 @@ export const useStore = create<AppState & StoreActions>()(
           editModes: {},
           selectedItems: {},
         }),
-    }),
-    {
-      name: 'customer-success-store',
-    }
-  )
-);
+    }));
