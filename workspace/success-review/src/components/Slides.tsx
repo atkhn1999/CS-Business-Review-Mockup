@@ -4,10 +4,10 @@ import { SlideShell } from './SlideShell'
 import { useSuccessPlanStore } from '../store'
 import type { AgendaSlide } from '../types'
 
-function TeamSlide() {
+function TeamSlide({ accent }: { accent?: string }) {
   const plan = useSuccessPlanStore(s => s.plan)
   return (
-    <SlideShell title="Account Team" subtitle={plan.accountName}>
+    <SlideShell title="Account Team" subtitle={plan.accountName} accentOverride={accent as any}>
       <div className="grid grid-cols-2 gap-6">
         {plan.team.length === 0 && (
           <div className="text-text-secondary">No team members added yet.</div>
@@ -31,10 +31,10 @@ function TeamSlide() {
   )
 }
 
-function StakeholdersSlide() {
+function StakeholdersSlide({ accent }: { accent?: string }) {
   const plan = useSuccessPlanStore(s => s.plan)
   return (
-    <SlideShell title="Customer Stakeholders" subtitle={plan.customerName}>
+    <SlideShell title="Customer Stakeholders" subtitle={plan.customerName} accentOverride={accent as any}>
       <div className="grid grid-cols-2 gap-6">
         {plan.stakeholders.length === 0 && (
           <div className="text-text-secondary">No stakeholders added yet.</div>
@@ -56,10 +56,10 @@ function StakeholdersSlide() {
   )
 }
 
-function MissionSlide() {
+function MissionSlide({ accent }: { accent?: string }) {
   const plan = useSuccessPlanStore(s => s.plan)
   return (
-    <SlideShell title="Mission Alignment" subtitle={`${plan.customerName} x ${plan.accountName}`}>
+    <SlideShell title="Mission Alignment" subtitle={`${plan.customerName} x ${plan.accountName}`} accentOverride={accent as any}>
       <div className="bg-white rounded-lg border shadow p-6">
         <div className="text-lg font-semibold text-ink mb-3">Our shared mission</div>
         <p className="text-text-secondary leading-7">{plan.missionStatement}</p>
@@ -68,10 +68,10 @@ function MissionSlide() {
   )
 }
 
-function GoalsSlide() {
+function GoalsSlide({ accent }: { accent?: string }) {
   const plan = useSuccessPlanStore(s => s.plan)
   return (
-    <SlideShell title="Long-term Goals" subtitle="Enduring outcomes">
+    <SlideShell title="Long-term Goals" subtitle="Enduring outcomes" accentOverride={accent as any}>
       <ul className="space-y-3">
         {plan.longTermGoals.length === 0 && (
           <li className="text-text-secondary">No long-term goals added yet.</li>
@@ -84,10 +84,10 @@ function GoalsSlide() {
   )
 }
 
-function ObjectivesSlide() {
+function ObjectivesSlide({ accent }: { accent?: string }) {
   const plan = useSuccessPlanStore(s => s.plan)
   return (
-    <SlideShell title="Objectives & KPIs" subtitle="Near-term objectives">
+    <SlideShell title="Objectives & KPIs" subtitle="Near-term objectives" accentOverride={accent as any}>
       <div className="space-y-4">
         {plan.objectives.length === 0 && (
           <div className="text-text-secondary">No objectives added yet.</div>
@@ -121,10 +121,10 @@ function ObjectivesSlide() {
   )
 }
 
-function HistorySlide() {
+function HistorySlide({ accent }: { accent?: string }) {
   const plan = useSuccessPlanStore(s => s.plan)
   return (
-    <SlideShell title="Previously Achieved" subtitle="Recent wins">
+    <SlideShell title="Previously Achieved" subtitle="Recent wins" accentOverride={accent as any}>
       <div className="space-y-3">
         {plan.history.length === 0 && (
           <div className="text-text-secondary">No previous objectives reviewed.</div>
@@ -141,10 +141,10 @@ function HistorySlide() {
   )
 }
 
-function ValueSlide() {
+function ValueSlide({ accent }: { accent?: string }) {
   const plan = useSuccessPlanStore(s => s.plan)
   return (
-    <SlideShell title="Value Realized" subtitle="Impact delivered">
+    <SlideShell title="Value Realized" subtitle="Impact delivered" accentOverride={accent as any}>
       <div className="grid grid-cols-2 gap-4">
         {plan.values.length === 0 && (
           <div className="text-text-secondary">No value items yet.</div>
@@ -170,19 +170,19 @@ function ValueSlide() {
 export function renderSlide(slide: AgendaSlide): React.ReactNode {
   switch (slide.type) {
     case 'team':
-      return <TeamSlide />
+      return <TeamSlide accent={slide.accent} />
     case 'stakeholders':
-      return <StakeholdersSlide />
+      return <StakeholdersSlide accent={slide.accent} />
     case 'mission':
-      return <MissionSlide />
+      return <MissionSlide accent={slide.accent} />
     case 'goals':
-      return <GoalsSlide />
+      return <GoalsSlide accent={slide.accent} />
     case 'objectives':
-      return <ObjectivesSlide />
+      return <ObjectivesSlide accent={slide.accent} />
     case 'history':
-      return <HistorySlide />
+      return <HistorySlide accent={slide.accent} />
     case 'value':
-      return <ValueSlide />
+      return <ValueSlide accent={slide.accent} />
     default:
       return null
   }

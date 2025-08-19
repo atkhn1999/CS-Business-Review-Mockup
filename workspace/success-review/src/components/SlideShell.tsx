@@ -1,10 +1,12 @@
 import React from 'react'
 import { useSuccessPlanStore } from '../store'
+import type { BrandColor } from '../types'
 
 type SlideShellProps = {
   title: string
   subtitle?: string
   children: React.ReactNode
+  accentOverride?: BrandColor
 }
 
 function getAccentClasses(accent?: string) {
@@ -27,10 +29,9 @@ function getAccentClasses(accent?: string) {
   }
 }
 
-export function SlideShell({ title, subtitle, children }: SlideShellProps) {
-  // Later we can pass per-slide accent. For now, use global brand color from store
+export function SlideShell({ title, subtitle, children, accentOverride }: SlideShellProps) {
   const brand = useSuccessPlanStore(s => s.plan.brandColor)
-  const accent = getAccentClasses(brand)
+  const accent = getAccentClasses(accentOverride ?? brand)
   return (
     <div className="w-full h-full flex flex-col">
       <div className={`p-6 bg-gradient-to-tr ${accent} text-white`}>

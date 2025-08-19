@@ -57,3 +57,11 @@ html, body, #root {
   overflow: hidden;
   line-height: 1.6;
 }
+
+/* Print styles for clean export */
+@media print {
+  @page { size: 1280px 720px; margin: 0; }
+  body { margin: 0; background: white; }
+  header, .no-print { display: none !important; }
+  [data-slide] { break-after: page; }
+}
