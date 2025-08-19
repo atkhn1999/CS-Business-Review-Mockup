@@ -1,7 +1,7 @@
 import React, { useRef } from 'react'
 import { useSuccessPlanStore } from '../store'
 import { useReactToPrint } from 'react-to-print'
-import { SlidesDeck } from './Slides'
+// import { SlidesDeck } from './Slides'
 import SlideList from './SlideList'
 import { exportPlanToJson, importPlanFromFile, exportSlidesToPdf, exportSlidesToPptx } from '../utils/exporters'
 
@@ -9,7 +9,7 @@ export default function Editor() {
   const { plan, updateField, addTeamMember, addStakeholder, addObjective, addHistoryItem, addValueItem } = useSuccessPlanStore()
   const deckRef = useRef<HTMLDivElement>(null)
 
-  const handlePrint = useReactToPrint({ content: () => deckRef.current })
+  const handlePrint = useReactToPrint({ documentTitle: 'Receptive AI Success Review' })
 
   async function handleImportJson(e: React.ChangeEvent<HTMLInputElement>) {
     const file = e.target.files?.[0]
