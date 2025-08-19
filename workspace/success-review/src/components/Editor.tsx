@@ -171,9 +171,9 @@ function SlidesDeckWrapper({ slides }: { slides: string[] }) {
   )
 }
 
+import { renderSlide } from './Slides'
+
 function SlidesDeckSingle({ slide }: { slide: any }) {
-  // simple proxy to reuse render function
-  const { renderSlide } = require('./Slides')
   const Component = renderSlide(slide)
   return (
     <div className="mx-auto">

@@ -1,7 +1,8 @@
 # Root Netlify config for building the app in workspace/success-review
 [build]
-  command = "npm run build --prefix workspace/success-review"
-  publish = "workspace/success-review/dist"
+  base = "workspace/success-review"
+  command = "npm run build"
+  publish = "dist"
 
   [build.environment]
     NODE_VERSION = "18"
