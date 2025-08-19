@@ -10,6 +10,7 @@ type SuccessPlanState = {
   reorderSlides: (fromIndex: number, toIndex: number) => void
   addSlide: (type: AgendaSlideType) => void
   removeSlide: (slideId: string) => void
+  updateSlide: (slideId: string, updates: Partial<AgendaSlide>) => void
   // entity helpers
   addTeamMember: (member: Omit<TeamMember, 'id'>) => void
   updateTeamMember: (id: string, updates: Partial<TeamMember>) => void
@@ -52,6 +53,7 @@ const initialPlan: SuccessPlanData = {
   values: [],
   slides: defaultSlides,
   theme: 'light',
+  brandColor: 'teal',
 }
 
 export const useSuccessPlanStore = create<SuccessPlanState>()(
@@ -68,6 +70,7 @@ export const useSuccessPlanStore = create<SuccessPlanState>()(
       },
       addSlide: (type) => set({ plan: { ...get().plan, slides: [...get().plan.slides, { id: uuid(), type }] } }),
       removeSlide: (slideId) => set({ plan: { ...get().plan, slides: get().plan.slides.filter(s => s.id !== slideId) } }),
+      updateSlide: (slideId, updates) => set({ plan: { ...get().plan, slides: get().plan.slides.map(s => s.id === slideId ? { ...s, ...updates } : s) } }),
 
       addTeamMember: (member) => set({ plan: { ...get().plan, team: [...get().plan.team, { id: uuid(), ...member }] } }),
       updateTeamMember: (id, updates) => set({ plan: { ...get().plan, team: get().plan.team.map(m => m.id === id ? { ...m, ...updates } : m) } }),

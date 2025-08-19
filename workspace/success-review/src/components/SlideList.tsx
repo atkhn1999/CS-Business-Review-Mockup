@@ -9,7 +9,7 @@ import {
 import { SortableContext, useSortable, verticalListSortingStrategy } from '@dnd-kit/sortable'
 import { CSS } from '@dnd-kit/utilities'
 import { useSuccessPlanStore } from '../store'
-import type { AgendaSlideType } from '../types'
+import type { AgendaSlideType, BrandColor } from '../types'
 
 function SlideRow({ id, title, type, onRemove }: { id: string; title?: string; type: AgendaSlideType; onRemove: () => void }) {
   const { attributes, listeners, setNodeRef, transform, transition } = useSortable({ id })
@@ -17,16 +17,29 @@ function SlideRow({ id, title, type, onRemove }: { id: string; title?: string; t
     transform: CSS.Transform.toString(transform),
     transition,
   }
+  const updateSlide = useSuccessPlanStore(s => s.updateSlide)
+  const slide = useSuccessPlanStore(s => s.plan.slides.find(s => s.id === id))
   return (
     <div ref={setNodeRef} style={style} className="flex items-center justify-between gap-3 bg-white border rounded-md shadow-sm px-3 py-2">
       <div className="flex items-center gap-3">
         <button className="cursor-grab select-none text-slate-500" {...attributes} {...listeners}>≡</button>
         <div>
-          <div className="font-medium text-ink">{title ?? type}</div>
+          <input value={slide?.title ?? title ?? type} onChange={e => updateSlide(id, { title: e.target.value })} className="text-zone py-1 px-2 text-sm" />
           <div className="text-xs text-text-tertiary capitalize">{type}</div>
         </div>
       </div>
-      <button onClick={onRemove} className="text-sm px-2 py-1 rounded bg-red-50 text-red-600">Remove</button>
+      <div className="flex items-center gap-2">
+        <label className="text-xs text-text-secondary flex items-center gap-1">
+          <input type="checkbox" checked={!!slide?.hidden} onChange={e => updateSlide(id, { hidden: e.target.checked })} /> Hide
+        </label>
+        <select className="text-zone py-1 px-2 text-sm" value={slide?.accent ?? ''} onChange={e => updateSlide(id, { accent: e.target.value as BrandColor })}>
+          <option value="">Accent: default</option>
+          {['teal','emerald','blue','indigo','purple','pink','orange'].map(c => (
+            <option key={c} value={c}>{c}</option>
+          ))}
+        </select>
+        <button onClick={onRemove} className="text-sm px-2 py-1 rounded bg-red-50 text-red-600">Remove</button>
+      </div>
     </div>
   )
 }

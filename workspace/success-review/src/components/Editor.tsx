@@ -3,6 +3,7 @@ import { useSuccessPlanStore } from '../store'
 import { useReactToPrint } from 'react-to-print'
 // import { SlidesDeck } from './Slides'
 import SlideList from './SlideList'
+import { TeamEditor, StakeholdersEditor, ObjectivesEditor, HistoryEditor, ValueEditor, BrandSettings } from './EditorPanels'
 import { exportPlanToJson, importPlanFromFile, exportSlidesToPdf, exportSlidesToPptx } from '../utils/exporters'
 
 export default function Editor() {
@@ -86,7 +87,37 @@ export default function Editor() {
           </div>
         </section>
 
-        <section className="col-span-8">
+        <section className="col-span-8 space-y-6">
+          <div className="bg-white border rounded-lg shadow-sm p-4">
+            <div className="font-semibold mb-3">Brand & Theme</div>
+            <BrandSettings />
+          </div>
+
+          <div className="bg-white border rounded-lg shadow-sm p-4">
+            <div className="font-semibold mb-3">Team</div>
+            <TeamEditor />
+          </div>
+
+          <div className="bg-white border rounded-lg shadow-sm p-4">
+            <div className="font-semibold mb-3">Stakeholders</div>
+            <StakeholdersEditor />
+          </div>
+
+          <div className="bg-white border rounded-lg shadow-sm p-4">
+            <div className="font-semibold mb-3">Objectives & KPIs</div>
+            <ObjectivesEditor />
+          </div>
+
+          <div className="bg-white border rounded-lg shadow-sm p-4">
+            <div className="font-semibold mb-3">Previously Achieved</div>
+            <HistoryEditor />
+          </div>
+
+          <div className="bg-white border rounded-lg shadow-sm p-4">
+            <div className="font-semibold mb-3">Value Realized</div>
+            <ValueEditor />
+          </div>
+
           <div ref={deckRef} className="space-y-8">
             {useSuccessPlanStore.getState().plan.slides.map(slide => (
               <div key={slide.id} data-slide>

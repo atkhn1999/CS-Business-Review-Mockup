@@ -193,7 +193,7 @@ export function SlidesDeck() {
   const canvases = useMemo(() => slides.map(() => React.createRef<HTMLDivElement>()), [slides])
   return (
     <div className="space-y-8">
-      {slides.map((slide, idx) => (
+      {slides.filter(s => !s.hidden).map((slide, idx) => (
         <SlideCanvas key={slide.id} ref={canvases[idx]}>
           {renderSlide(slide)}
         </SlideCanvas>

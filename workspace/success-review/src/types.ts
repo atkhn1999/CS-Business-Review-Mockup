@@ -56,10 +56,14 @@ export type AgendaSlideType =
   | 'history'
   | 'value';
 
+export type BrandColor = 'teal' | 'emerald' | 'blue' | 'indigo' | 'purple' | 'pink' | 'orange';
+
 export type AgendaSlide = {
   id: string;
   type: AgendaSlideType;
   title?: string;
+  hidden?: boolean;
+  accent?: BrandColor; // optional per-slide accent override
 };
 
 export type SuccessPlanData = {
@@ -74,6 +78,7 @@ export type SuccessPlanData = {
   values: ValueRealizedItem[];
   slides: AgendaSlide[];
   theme?: 'light' | 'dark';
+  brandColor?: BrandColor;
 };
 
 export type ExportBundle = {
