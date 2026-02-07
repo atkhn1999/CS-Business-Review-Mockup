@@ -1,0 +1,14 @@
+# Root Netlify config for building the app in workspace/success-review
+[build]
+  base = "workspace/success-review"
+  command = "npm run build"
+  publish = "dist"
+
+  [build.environment]
+    NODE_VERSION = "18"
+
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
+
